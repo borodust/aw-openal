@@ -1,0 +1,3 @@
+[submodule "src/lib/openal"]
+	path = src/lib/openal
+	url = https://github.com/borodust/openal-soft.git
