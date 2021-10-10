@@ -4,7 +4,9 @@
   :author "Pavel Korolev"
   :mailto "dev@borodust.org"
   :license "MIT"
-  :depends-on (:aw-openal-bindings :aw-openal-context-bindings))
+  :depends-on (:aw-openal-bindings
+               :aw-openal-context-bindings
+               :aw-openal-ext-bindings))
 
 
 (asdf:defsystem :aw-openal/wrapper
