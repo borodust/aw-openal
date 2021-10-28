@@ -65,11 +65,26 @@ function build_android {
             ;;
     esac
 
+    EXT_CMAKE_OPTS= -DALSOFT_REQUIRE_OPENSL=ON -DALSOFT_REQUIRE_OBOE=ON
+
     mkdir -p $BUILD_DIR && cd $BUILD_DIR
-    cmake -DCLAW_ANDROID_BUILD=ON \
+    cmake -DCMAKE_BUILD_TYPE=MinSizeRel \
           -DANDROID_ABI=$ANDROID_ABI \
+          -DANDROID_PLATFORM=23 \
           -DANDROID_ARM_NEON=ON \
           -DCMAKE_TOOLCHAIN_FILE="$NDK/build/cmake/android.toolchain.cmake" \
+          -DCMAKE_SKIP_BUILD_RPATH=OFF \
+          -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
+          '-DCMAKE_INSTALL_RPATH=${ORIGIN}' \
+          -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+	  -DLIBTYPE=SHARED \
+	  -DBUILD_SHARED_LIBS=OFF \
+	  -DALSOFT_UTILS=OFF \
+	  -DALSOFT_NO_CONFIG_UTIL=OFF \
+	  -DALSOFT_EXAMPLES=OFF \
+	  -DALSOFT_INSTALL=OFF \
+	  -DALSOFT_CPUEXT_NEON=OFF \
+          ${EXT_CMAKE_OPTS} \
           $LIBRARY_DIR
     cmake --build . --config MinSizeRel
 }
@@ -102,8 +117,7 @@ function build_desktop {
 	  -DALSOFT_NO_CONFIG_UTIL=OFF \
 	  -DALSOFT_EXAMPLES=OFF \
 	  -DALSOFT_INSTALL=OFF \
-	  -DALSOFT_CPUEXT_SSE3=OFF \
-	  -DALSOFT_CPUEXT_SSE4_1=OFF \
+	  -DALSOFT_CPUEXT_SSE4_1=ON \
           ${EXT_CMAKE_OPTS} \
           $LIBRARY_DIR
     cmake --build . --config MinSizeRel
