@@ -2592,7 +2592,7 @@
               (%al.ext::value3
                (claw-utils:claw-pointer %al.ext::int)))
 
-(cffi:defctype %al.ext::int64 :long)
+(cffi:defctype %al.ext::int64 :long-long)
 
 (declaim (inline %al.ext::get-source3i64))
 
@@ -3128,7 +3128,7 @@
               (%al.ext::device
                (claw-utils:claw-pointer %al.ext::device)))
 
-(cffi:defctype %al.ext::int64 :long)
+(cffi:defctype %al.ext::int64 :long-long)
 
 (declaim (inline %al.ext::get-integer64v))
 
@@ -3566,9 +3566,9 @@
 (cffi:defctype %al.ext::lpalcsuspendcont
                (claw-utils:claw-pointer :void))
 
-(cffi:defctype %al.ext::uint64 :unsigned-long)
+(cffi:defctype %al.ext::uint64 :unsigned-long-long)
 
-(cffi:defctype %al.ext::uint64 :unsigned-long)
+(cffi:defctype %al.ext::uint64 :unsigned-long-long)
 
 (eval-when (:load-toplevel :compile-toplevel :execute)
   (export '%al.ext::+eaxreverb-max-room-rolloff-factor+ :%al.ext)
