@@ -23,6 +23,14 @@ $WorkDir = $PSScriptRoot
 $BuildDir = "$WorkDir/build/desktop/"
 $LibraryDir = "$WorkDir/openal/"
 
+
+if ( $BuildType -eq "Debug" ) {
+    $CmakeExtraCmdLine = "-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDebugDLL"
+} else {
+    $CmakeExtraCmdLine = "-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL"
+}
+
+
 ### CONFIGURATION END ###
 
 md $BuildDir -Force | Out-Null
@@ -30,6 +38,7 @@ pushd $BuildDir
 
 cmake -G "Visual Studio 16 2019" -A x64 -Thost=x64 `
   -DCMAKE_POSITION_INDEPENDENT_CODE=ON `
+  $CmakeExtraCmdLine `
   -DLIBTYPE=SHARED `
   -DALSOFT_UTILS=OFF `
   -DALSOFT_NO_CONFIG_UTIL=OFF `
